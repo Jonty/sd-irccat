@@ -15,11 +15,11 @@ config.read(['sd-irccat.conf'])
 
 account = config.get('serverdensity', 'account')
 auth = (config.get('serverdensity', 'username'), config.get('serverdensity', 'password'))
-response = requests.get('https://api.serverdensity.com/1.4/alerts/getLast?account=%s' % account, auth=auth)
 
 alerts_seen = set()
 
 while True:
+    response = requests.get('https://api.serverdensity.com/1.4/alerts/getLast?account=%s' % account, auth=auth)
     data = json.loads(response.content)
     for alert in data['data']['alerts']:
         service = alert['device']['name']
